@@ -169,10 +169,10 @@ module.exports = class Camera {
         const response = await axios.post(API.DEVICE_MANAGER.SUBSCRIBE_EVENT, qs.stringify({
             deviceSerial: this.deviceSerial,
             accessToken: this.accessToken,
-            'method': 'post',
+            'method': 'POST',
         }));
         const resData = await this.parseXML(response.data.data);
-        if (!resData.SubscribeEventResponse && resData.statusString !== 'OK') {
+        if (!resData.SubscribeEventResponse && resData.ResponseStatus.statusString !== 'OK') {
             throw  Error(resData.statusString);
         }
         return {success: 'ture'};
