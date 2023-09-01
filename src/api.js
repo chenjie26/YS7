@@ -19,6 +19,7 @@ module.exports = {
         QR_CODE: 'https://open.ys7.com/api/lapp/device/wifi/qrcode',     // 生成设备扫描配网二维码二进制数据
         RENAME_CHANEL: 'https://open.ys7.com/api/lapp/camera/name/update',  // 修改通道名称
         SET_DEFENCE_TIME: 'https://open.ys7.com/api/lapp/device/defence/plan/set', // 设置布撤防时间计划
+        SUBSCRIBE_EVENT: 'https://open.ys7.com/api/open/cloud/ISAPI/Event/notification/subscribeEvent', // 开启设备消息订阅
     },
     DEVICE_QUERY: {
         LIST: 'https://open.ys7.com/api/lapp/device/list',  //获取用户下的设备列表

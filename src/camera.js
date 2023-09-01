@@ -141,6 +141,17 @@ module.exports = class Camera {
         return response.data.data;
     }
 
+    async subScribeEvent() {
+        const response = await axios.post(API.DEVICE_MANAGER.SUBSCRIBE_EVENT, qs.stringify({
+            deviceSerial: this.deviceSerial,
+            accessToken: this.accessToken,
+        }));
+        if (response.data.code != 200) {
+            throw  Error(response.data.msg);
+        }
+        return response.data.data;
+    }
+
 
 };
 
