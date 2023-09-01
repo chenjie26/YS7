@@ -1,10 +1,34 @@
 const axios = require('axios');
 const qs = require('querystring');
 const API = require('./api');
+const xml2js = require('xml2js');
 module.exports = class Camera {
     constructor(deviceSerial, token) {
         this.deviceSerial = deviceSerial;
         this.accessToken = token;
+    }
+
+    async parseXML(xmlString) {
+        const parser = new xml2js.Parser({ explicitArray: false, trim: true, cdata: true });
+
+        return new Promise((resolve, reject) => {
+            parser.parseString(xmlString, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
+    async canParseXML(data) {
+        try {
+            const parseData = await this.parseXML(data);
+            return !!parseData;
+        } catch (e) {
+            return false;
+        }
     }
 
     async getInfo() {
@@ -145,11 +169,13 @@ module.exports = class Camera {
         const response = await axios.post(API.DEVICE_MANAGER.SUBSCRIBE_EVENT, qs.stringify({
             deviceSerial: this.deviceSerial,
             accessToken: this.accessToken,
+            'method': 'post',
         }));
-        if (response.data.code != 200) {
-            throw  Error(response.data.msg);
+        const resData = await this.parseXML(response.data.data);
+        if (!resData.SubscribeEventResponse && resData.statusString !== 'OK') {
+            throw  Error(resData.statusString);
         }
-        return response.data.data;
+        return {success: 'ture'};
     }
 
 
