@@ -1,5 +1,5 @@
 {
-  "name": "ys7",
+  "name": "@tengyu/ys7",
   "version": "1.0.2",
   "description": "萤石云SDK(非官方)",
   "main": "index.js",
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hankexu/YS7"
+    "url": "https://github.com/chenjie26/YS7"
   },
-  "author": "Hanke Xu",
+  "author": "@tengyu/ys7",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.24.0"
